@@ -1,8 +1,5 @@
 # pomodoro
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
-
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
@@ -24,9 +21,8 @@ You will need the following things properly installed on your computer.
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 * Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
-### Code Generators
 
-Make use of the many generators for code, try `ember help generate` for more details
+NOTE: there is a property called `clockSpeed` that can be manually set in the component code to speed the timer up for smoke testing
 
 ### Running Tests
 
@@ -43,10 +39,6 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 * `ember build` (development)
 * `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
 
 ## Further Reading / Useful Links
 
