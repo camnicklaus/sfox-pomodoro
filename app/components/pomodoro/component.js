@@ -3,7 +3,9 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class PomodoroComponent extends Component {
-  alarm = new Audio('http://soundbible.com/grab.php?id=595&type=mp3');
+  alarm = new Audio('http://soundbible.com/grab.php?id=165&type=mp3');
+  finalAlarm = new Audio('http://soundbible.com/mp3/Store_Door_Chime-Mike_Koenig-570742973.mp3');
+
   maxPomOptions = [
     { value: 2, label: '2 poms' },
     { value: 4, label: '4 poms' },
@@ -11,6 +13,12 @@ export default class PomodoroComponent extends Component {
     { value: 8, label: '8 poms' },
     { value: 10, label: '10 poms' },
   ];
+
+  clockSpeedOptions = [
+    { value: 1, label: 'normal' },
+    { value: 2, label: '2x' },
+    { value: 100, label: 'ludicrous' }
+  ]
 
   @tracked timerRef;
   @tracked poms = [];
@@ -44,7 +52,8 @@ export default class PomodoroComponent extends Component {
 
   @action
   setClockSpeed({ target }) {
-    this.clockSpeed = Number(target.value);
+    let opt = this.clockSpeedOptions.find(opt => opt.value === +target.value)
+    this.clockSpeed = parseFloat(opt.value)
     if (this.timerRef) {
       this.stopTimer();
       this.startTimer();
@@ -95,13 +104,13 @@ export default class PomodoroComponent extends Component {
     this.currentBreakTime = this.initializedBreakTime;
 
     if (this.timerRef) {
+      if (this.maxPoms <= this.poms.length + 1) {
+        this.resetPomodoro();
+        return;
+      }
+
       this.alarm.volume = 0.4;
       this.alarm.play();
-
-      if (this.poms.length >= this.maxPoms) {
-        this.poms = [];
-        return this.stopTimer();
-      }
 
       if (this.workMode) {
         this.poms = [...this.poms, this.poms.length + 1];
@@ -120,6 +129,11 @@ export default class PomodoroComponent extends Component {
   resetPomodoro() {
     this.stopTimer();
     this.clearTimer();
+    if (this.maxPoms === this.poms.length + 1) {
+      this.finalAlarm.volume = 0.4;
+      this.finalAlarm.play();
+    }
+    this.workMode = true;
     this.poms = [];
   }
 }

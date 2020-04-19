@@ -1,4 +1,4 @@
-<div class={{concat (if this.workMode "text-red-300 " "text-blue-300 ") "rounded overflow-hidden bg-gray-800 shadow-lg flex justify-center items-center flex-col p-4"}}>
+<div class="rounded overflow-hidden bg-gray-800 shadow-lg flex justify-center items-center flex-col p-4">
   <h1 class="text-2xl mt-2 mb-6 text-blue-200">POMODORO</h1>
   <div
     class={{concat (if this.workMode "bg-red-300 " "bg-blue-300 ") "rounded-full w-40 h-40 my-4 text-gray-800 text-4xl flex justify-center items-center"}}>
@@ -33,7 +33,7 @@
 
   <div class="w-full flex justify-start mt-4 mb-2">
     <select
-      class="appearance-none bg-transparent border-none text-blue-300 py-3 px-4 rounded leading-tight focus:outline-none"
+      class="cursor-pointer appearance-none bg-transparent border-none text-blue-300 py-3 px-4 rounded leading-tight focus:outline-none"
       {{on "change" this.setMaxPoms}}>
       {{#each this.maxPomOptions as |opt|}}
         <option value={{opt.value}} selected={{eq this.maxPoms opt.value}}>{{opt.label}}</option>
@@ -75,3 +75,11 @@
     </button>
   </div>
 </div>
+
+<select
+  class="cursor-pointer  bg-gray-300 text-blue-700 h-10 w-40 leading-tight focus:outline-none mt-6 mb-6"
+  {{on "change" this.setClockSpeed}}>
+  {{#each this.clockSpeedOptions as |opt|}}
+    <option value={{opt.value}} selected={{eq this.clockSpeed opt.value}}>{{opt.label}}</option>
+  {{/each}}
+</select>
